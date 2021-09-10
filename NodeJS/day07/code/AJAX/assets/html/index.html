@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/index.js"></script>
+</head>
+<body>
+    <h1>首页标题</h1>
+    <hr>
+    <p>欢迎来到我们网站！</p>
+    <a href="/detail.html">跳转到详情页</a> <br><br>
+    <button id="obtn">点击按钮加载更多消息</button>
+    <div id="odiv"></div>
+    <!-- 需求：点击button按钮，做ajax请求，从服务器获取数据，放到div盒子中 -->
+
+    <script>
+
+        let obtn = document.getElementById("obtn");
+        let odiv = document.getElementById("odiv");
+
+        obtn.onclick = () => {
+            console.log("点击了按钮");
+            
+            // 发送ajax请求    阿贾克斯
+
+
+            //1、创建ajax对象
+            let ajax = new XMLHttpRequest();   
+
+            //2、设置请求路径url，请求方式
+            ajax.open("GET", "/get_data"+Math.random());
+
+            ajax.setRequestHeader('Cache-Control', 'no-cache');   // 请求头的设置
+
+            //3、绑定监听状态的改变的处理函数，在这个函数里面可以获取响应数据   (回调函数)
+            ajax.onreadystatechange = () =>{
+                // 这个函数里面的代码什么时候执行？？  状态发生改变的时候就执行
+
+                //获取响应的数据
+                // console.log(ajax.readyState);
+
+                //什么时候我可以开始渲染数据？服务端响应完毕之后 readyState为4，并且成功获取数据之后 status为200
+                if(ajax.readyState===4 && ajax.status===200){
+                    
+                    // 服务器传来的数据？？用什么表示
+                    console.log(ajax.responseText);
+
+                    // 渲染数据到页面上？
+                    odiv.innerHTML = ajax.responseText;
+                }
+                
+                
+            }
+
+            //4、发送请求
+            ajax.send();
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/index.js"></script>
+    <script src="../js/jquery-3.4.1.js"></script>
+</head>
+<body>
+    <h1>jquery_get</h1>
+    <hr>
+    <p>欢迎来到我们网站！</p>
+    <a href="/detail.html">跳转到详情页</a> <br><br>
+    <button id="obtn">点击按钮加载更多消息</button>
+    <div id="odiv"></div>
+    <!-- 需求：点击button按钮，做ajax请求，从服务器获取数据，放到div盒子中 -->
+
+    <script>
+        $("#obtn").click(()=>{
+
+            // 发送ajax的get请求：
+            // $.ajax({
+            //     url:"/get_data",
+            //     data:{
+            //         name:"nodejs",
+            //         age:12
+            //     },
+            //     success:(resp)=>{
+            //         // 请求成功之后的回调函数，resp就是服务器响应过来的数据
+            //         console.log(resp);
+            //         $("#odiv").html(resp);
+            //     }
+            // });
+
+            // jq提供了另外一种书写方式：
+            $.get("/get_data", {name:"nodejs", age:13}, (resp)=>{
+                console.log(resp);
+                $("#odiv").html(resp);
+            })
+
+
+        })
+    </script>
+</body>
+</html>
